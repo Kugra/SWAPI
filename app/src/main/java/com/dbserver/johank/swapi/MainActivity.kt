@@ -1,25 +1,45 @@
 package com.dbserver.johank.swapi
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import android.support.v7.app.AlertDialog
+import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.StaggeredGridLayoutManager
+import android.view.View
+import android.widget.TextView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
 
-    val charactersList = mutableListOf<Character>()
-    var hasNext: Boolean = false
-    var firstRun: Boolean = true
-    var nextPageUrl: String? = null
+    private var hasNext: Boolean = false
+    private var firstRun: Boolean = true
+    private var nextPageUrl: String? = null
+
+    private val charactersList = mutableListOf<Character>()
+    private lateinit var recyclerView : RecyclerView
+    private lateinit var adapter: CharacterAdapter
+    private lateinit var progressDialog: AlertDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        buildAlertDialogForProgress()
         getAllCharacters()
 
+    }
+
+    private fun buildAlertDialogForProgress(){
+        val dialogView = View.inflate(this, R.layout.custom_dialog_progress, null)
+        val builder = AlertDialog.Builder(this)
+        val message = dialogView.findViewById<TextView>(R.id.messageDialog)
+
+        message.text = getString(R.string.loading_characters)
+        builder.setView(dialogView)
+        builder.setCancelable(false)
+        progressDialog = builder.create()
     }
 
     /*private fun firstTest(){
@@ -61,12 +81,14 @@ class MainActivity : AppCompatActivity() {
 
     private fun getAllCharacters(){
 
+        progressDialog.show()
+
         if(firstRun) {
             val call = RetrofitInitializer().starWarsService().getCharacters()
 
             call.enqueue(object : Callback<CharactersPage> {
                 override fun onFailure(call: Call<CharactersPage>?, t: Throwable?) {
-                    Log.e("error", t?.message)
+                    println(t?.message)
                 }
 
                 override fun onResponse(call: Call<CharactersPage>?, response: Response<CharactersPage>?) {
@@ -75,7 +97,6 @@ class MainActivity : AppCompatActivity() {
                         if (it.next != null) {
                             hasNext = true
                             nextPageUrl = it.next
-
                         } else {
                             hasNext = false
                         }
@@ -94,7 +115,7 @@ class MainActivity : AppCompatActivity() {
 
                 call.enqueue(object : Callback<CharactersPage> {
                     override fun onFailure(call: Call<CharactersPage>?, t: Throwable?) {
-                        Log.e("error", t?.message)
+                        println(t?.message)
                     }
 
                     override fun onResponse(call: Call<CharactersPage>?, response: Response<CharactersPage>?) {
@@ -102,7 +123,6 @@ class MainActivity : AppCompatActivity() {
                             if (it.next != null) {
                                 hasNext = true
                                 nextPageUrl = it.next
-
                             } else {
                                 hasNext = false
                             }
@@ -114,13 +134,21 @@ class MainActivity : AppCompatActivity() {
                         getAllCharacters()
                     }
                 })
-            }
-            else {
-                charactersList.forEach {
-                    Log.d("try", it.name) //faça algo
-                }
+            } else {
+                initRecyclerView()
+                progressDialog.dismiss()
+                recyclerView.visibility = View.VISIBLE
             }
         }
+    }
+
+    private fun initRecyclerView(){
+        recyclerView = findViewById(R.id.characterRecyclerView)
+        adapter = CharacterAdapter(charactersList, this)
+        recyclerView.adapter = adapter
+
+        val layoutManager = StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL)
+        recyclerView.layoutManager = layoutManager
     }
 
 }
