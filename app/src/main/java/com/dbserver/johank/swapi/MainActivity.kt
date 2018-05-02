@@ -9,11 +9,21 @@ import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
 
+    val charactersList = mutableListOf<Character>()
+    var hasNext: Boolean = false
+    var firstRun: Boolean = true
+    var nextPageUrl: String? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-/*        val call = RetrofitInitializer().starWarsService().getCharacterOneAsTest()
+        getAllCharacters()
+
+    }
+
+    /*private fun firstTest(){
+        val call = RetrofitInitializer().starWarsService().getCharacterOneAsTest()
 
         call.enqueue(object : Callback<Character> {
             override fun onResponse(call: Call<Character>?, response: Response<Character>?) {
@@ -25,11 +35,13 @@ class MainActivity : AppCompatActivity() {
             override fun onFailure(call: Call<Character>?, t: Throwable?) {
                 Log.e("onFailure", t?.message)
             }
-        })*/
+        })
+    }
 
-        val call2 = RetrofitInitializer().starWarsService().getCharacters()
+    private fun secondTest(){
+        val call = RetrofitInitializer().starWarsService().getCharacters()
 
-        call2.enqueue(object : Callback<CharactersPage> {
+        call.enqueue(object : Callback<CharactersPage> {
             override fun onFailure(call: Call<CharactersPage>?, t: Throwable?) {
                 Log.e("onFailure", t?.message)
             }
@@ -45,6 +57,70 @@ class MainActivity : AppCompatActivity() {
             }
 
         })
+    }*/
 
+    private fun getAllCharacters(){
+
+        if(firstRun) {
+            val call = RetrofitInitializer().starWarsService().getCharacters()
+
+            call.enqueue(object : Callback<CharactersPage> {
+                override fun onFailure(call: Call<CharactersPage>?, t: Throwable?) {
+                    Log.e("error", t?.message)
+                }
+
+                override fun onResponse(call: Call<CharactersPage>?, response: Response<CharactersPage>?) {
+                    response?.body()?.let {
+
+                        if (it.next != null) {
+                            hasNext = true
+                            nextPageUrl = it.next
+
+                        } else {
+                            hasNext = false
+                        }
+
+                        it.results.forEach {
+                            charactersList.add(it)
+                        }
+                    }
+                    firstRun = false
+                    getAllCharacters()
+                }
+            })
+        } else {
+            if(hasNext) {
+                val call = RetrofitInitializer().starWarsService().getCharactersPage(nextPageUrl!!)
+
+                call.enqueue(object : Callback<CharactersPage> {
+                    override fun onFailure(call: Call<CharactersPage>?, t: Throwable?) {
+                        Log.e("error", t?.message)
+                    }
+
+                    override fun onResponse(call: Call<CharactersPage>?, response: Response<CharactersPage>?) {
+                        response?.body()?.let{
+                            if (it.next != null) {
+                                hasNext = true
+                                nextPageUrl = it.next
+
+                            } else {
+                                hasNext = false
+                            }
+
+                            it.results.forEach {
+                                charactersList.add(it)
+                            }
+                        }
+                        getAllCharacters()
+                    }
+                })
+            }
+            else {
+                charactersList.forEach {
+                    Log.d("try", it.name) //faça algo
+                }
+            }
+        }
     }
+
 }
