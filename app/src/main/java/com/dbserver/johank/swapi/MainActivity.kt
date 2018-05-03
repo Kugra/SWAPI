@@ -21,6 +21,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var recyclerView : RecyclerView
     private lateinit var adapter: CharacterAdapter
     private lateinit var progressDialog: AlertDialog
+    private lateinit var call: Call<CharactersPage>
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -79,68 +81,48 @@ class MainActivity : AppCompatActivity() {
         })
     }*/
 
-    private fun getAllCharacters(){
+    private fun getAllCharacters() {
 
         progressDialog.show()
 
-        if(firstRun) {
-            val call = RetrofitInitializer().starWarsService().getCharacters()
-
-            call.enqueue(object : Callback<CharactersPage> {
-                override fun onFailure(call: Call<CharactersPage>?, t: Throwable?) {
-                    println(t?.message)
-                }
-
-                override fun onResponse(call: Call<CharactersPage>?, response: Response<CharactersPage>?) {
-                    response?.body()?.let {
-
-                        if (it.next != null) {
-                            hasNext = true
-                            nextPageUrl = it.next
-                        } else {
-                            hasNext = false
-                        }
-
-                        it.results.forEach {
-                            charactersList.add(it)
-                        }
-                    }
-                    firstRun = false
-                    getAllCharacters()
-                }
-            })
-        } else {
-            if(hasNext) {
-                val call = RetrofitInitializer().starWarsService().getCharactersPage(nextPageUrl!!)
-
-                call.enqueue(object : Callback<CharactersPage> {
-                    override fun onFailure(call: Call<CharactersPage>?, t: Throwable?) {
-                        println(t?.message)
-                    }
-
-                    override fun onResponse(call: Call<CharactersPage>?, response: Response<CharactersPage>?) {
-                        response?.body()?.let{
-                            if (it.next != null) {
-                                hasNext = true
-                                nextPageUrl = it.next
-                            } else {
-                                hasNext = false
-                            }
-
-                            it.results.forEach {
-                                charactersList.add(it)
-                            }
-                        }
-                        getAllCharacters()
-                    }
-                })
-            } else {
-                initRecyclerView()
-                progressDialog.dismiss()
-                recyclerView.visibility = View.VISIBLE
-            }
+        if (firstRun) {
+            call = RetrofitInitializer().starWarsService().getCharacters()
+        } else if (!firstRun) {
+            call = RetrofitInitializer().starWarsService().getCharactersPage(nextPageUrl!!)
         }
+
+        call.enqueue(object : Callback<CharactersPage> {
+            override fun onFailure(call: Call<CharactersPage>?, t: Throwable?) {
+                println(t?.message)
+            }
+
+            override fun onResponse(call: Call<CharactersPage>?, response: Response<CharactersPage>?) {
+                response?.body()?.let {
+
+                    if (it.next != null) {
+                        hasNext = true
+                        nextPageUrl = it.next
+                    } else {
+                        hasNext = false
+                    }
+
+                    it.results.forEach {
+                        charactersList.add(it)
+                    }
+                }
+                firstRun = false
+
+                if(hasNext) {
+                    getAllCharacters()
+                } else {
+                    initRecyclerView()
+                    progressDialog.dismiss()
+                    recyclerView.visibility = View.VISIBLE
+                }
+            }
+        })
     }
+
 
     private fun initRecyclerView(){
         recyclerView = findViewById(R.id.characterRecyclerView)
