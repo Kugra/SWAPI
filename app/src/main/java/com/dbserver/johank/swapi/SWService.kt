@@ -9,9 +9,6 @@ interface SWService {
     @GET("people/")
     fun getCharacters(): Call<CharactersPage>
 
-    @GET("people/1/")
-    fun getCharacterOneAsTest(): Call<Character>
-
     @GET
     fun getCharactersPage(@Url url: String): Call<CharactersPage>
 }
