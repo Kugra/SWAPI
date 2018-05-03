@@ -1,19 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_marginTop="4dp"
+    android:layout_marginBottom="4dp"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
+    app:cardCornerRadius="15dp">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:padding="16dp"
+        android:background="@drawable/custom_background_cardview_character">
 
         <TextView
             android:id="@+id/nameTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
             android:text="Leia Organa"
             android:textColor="@color/black"
             android:textSize="18sp"
@@ -32,8 +39,7 @@
             android:textSize="14sp"
             app:layout_constraintTop_toBottomOf="@id/nameTextView"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="8dp"
-            android:layout_marginStart="16dp"/>
+            android:layout_marginTop="8dp"/>
 
         <TextView
             android:id="@+id/labelHeight"
@@ -44,8 +50,7 @@
             android:textSize="14sp"
             app:layout_constraintTop_toBottomOf="@id/labelGender"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="8dp"
-            android:layout_marginStart="16dp"/>
+            android:layout_marginTop="8dp"/>
 
         <TextView
             android:id="@+id/labelMass"
@@ -56,8 +61,7 @@
             android:textSize="14sp"
             app:layout_constraintTop_toBottomOf="@id/labelHeight"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="8dp"
-            android:layout_marginStart="16dp"/>
+            android:layout_marginTop="8dp"/>
 
         <TextView
             android:id="@+id/genderTextView"
@@ -90,7 +94,7 @@
             app:layout_constraintStart_toEndOf="@id/labelMass"
             app:layout_constraintEnd_toEndOf="@id/guideline"
             app:layout_constraintTop_toTopOf="@id/labelMass"
-            android:layout_marginStart="8dp" />
+            android:layout_marginStart="8dp"/>
 
         <android.support.constraint.Guideline
             android:id="@+id/guideline"
@@ -153,8 +157,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/labelBirth"
             app:layout_constraintBottom_toBottomOf="@id/labelBirth"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="16dp"/>
+            android:layout_marginStart="8dp"/>
 
         <TextView
             android:id="@+id/hairTextView"
@@ -165,8 +168,7 @@
             app:layout_constraintTop_toBottomOf="@id/birthTextView"
             app:layout_constraintStart_toEndOf="@id/labelHair"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"/>
+            android:layout_marginTop="8dp"/>
 
         <TextView
             android:id="@+id/eyeTextView"
@@ -177,8 +179,7 @@
             app:layout_constraintTop_toBottomOf="@id/hairTextView"
             app:layout_constraintStart_toEndOf="@id/labelEye"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"/>
+            android:layout_marginTop="8dp"/>
 
         <TextView
             android:id="@+id/skinTextView"
@@ -189,8 +190,7 @@
             app:layout_constraintTop_toBottomOf="@id/eyeTextView"
             app:layout_constraintStart_toEndOf="@id/labelSkin"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"/>
+            android:layout_marginTop="8dp"/>
 
     </android.support.constraint.ConstraintLayout>
 
