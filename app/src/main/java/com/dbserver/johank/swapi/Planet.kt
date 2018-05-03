@@ -12,5 +12,5 @@ data class Planet(
         val terrain: String,
         val surface_water: String,
         val population: String,
-        val residents: List<Character>,
+        val residents: List<Character>?,
         val films: List<Film>)

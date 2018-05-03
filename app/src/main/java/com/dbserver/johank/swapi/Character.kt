@@ -8,4 +8,9 @@ data class Character (
         val skin_color: String,
         val eye_color: String,
         val birth_year: String,
-        val gender: String)
+        val gender: String,
+        val homeworld: Planet,
+        val films: List<Film>,
+//        val species: Specie,
+//        val vehicles: List<>,
+        val starships: List<Starship>?)
