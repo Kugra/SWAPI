@@ -9,31 +9,188 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/nameLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:text="@string/character_name"
-            android:textStyle="bold"
-            android:textSize="14sp"
-            android:textAllCaps="true"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="16dp"
-            android:layout_marginStart="16dp" />
-
-        <TextView
             android:id="@+id/nameTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="Leia Organa"
             android:textColor="@color/black"
-            app:layout_constraintStart_toEndOf="@id/nameLabel"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginTop="16dp" />
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:gravity="center_vertical"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/guideline"
+            app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/labelGender"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="- Gender: "
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:layout_constraintTop_toBottomOf="@id/nameTextView"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="16dp"/>
+
+        <TextView
+            android:id="@+id/labelHeight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="- Height: "
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:layout_constraintTop_toBottomOf="@id/labelGender"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="16dp"/>
+
+        <TextView
+            android:id="@+id/labelMass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="- Mass: "
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:layout_constraintTop_toBottomOf="@id/labelHeight"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="16dp"/>
+
+        <TextView
+            android:id="@+id/genderTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@id/labelGender"
+            app:layout_constraintEnd_toEndOf="@id/guideline"
+            app:layout_constraintTop_toTopOf="@id/labelGender"
+            android:layout_marginStart="8dp"/>
+
+        <TextView
+            android:id="@+id/heightTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@id/labelHeight"
+            app:layout_constraintEnd_toEndOf="@id/guideline"
+            app:layout_constraintTop_toTopOf="@id/labelHeight"
+            android:layout_marginStart="8dp"/>
+
+        <TextView
+            android:id="@+id/massTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@id/labelMass"
+            app:layout_constraintEnd_toEndOf="@id/guideline"
+            app:layout_constraintTop_toTopOf="@id/labelMass"
+            android:layout_marginStart="8dp" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="1dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5"/>
+
+        <TextView
+            android:id="@+id/labelBirth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="- Birth: "
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:layout_constraintTop_toTopOf="@id/nameTextView"
+            app:layout_constraintBottom_toBottomOf="@id/nameTextView"
+            app:layout_constraintStart_toEndOf="@id/guideline"/>
+
+        <TextView
+            android:id="@+id/labelHair"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="- Hair Color: "
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:layout_constraintTop_toBottomOf="@id/labelBirth"
+            app:layout_constraintStart_toEndOf="@id/guideline"
+            android:layout_marginTop="8dp"/>
+
+        <TextView
+            android:id="@+id/labelEye"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="- Eye Color: "
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:layout_constraintTop_toBottomOf="@id/labelHair"
+            app:layout_constraintStart_toEndOf="@id/guideline"
+            android:layout_marginTop="8dp"/>
+
+        <TextView
+            android:id="@+id/labelSkin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="- Skin Color: "
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:layout_constraintTop_toBottomOf="@id/labelEye"
+            app:layout_constraintStart_toEndOf="@id/guideline"
+            android:layout_marginTop="8dp"/>
+
+        <TextView
+            android:id="@+id/birthTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@id/labelBirth"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/labelBirth"
+            app:layout_constraintBottom_toBottomOf="@id/labelBirth"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp"/>
+
+        <TextView
+            android:id="@+id/hairTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:layout_constraintTop_toBottomOf="@id/birthTextView"
+            app:layout_constraintStart_toEndOf="@id/labelHair"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"/>
+
+        <TextView
+            android:id="@+id/eyeTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:layout_constraintTop_toBottomOf="@id/hairTextView"
+            app:layout_constraintStart_toEndOf="@id/labelEye"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"/>
+
+        <TextView
+            android:id="@+id/skinTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:layout_constraintTop_toBottomOf="@id/eyeTextView"
+            app:layout_constraintStart_toEndOf="@id/labelSkin"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"/>
 
     </android.support.constraint.ConstraintLayout>
 
