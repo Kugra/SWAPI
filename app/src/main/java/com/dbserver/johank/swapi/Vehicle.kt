@@ -1,5 +1,7 @@
 package com.dbserver.johank.swapi
 
+/*FULL IMPLEMENTATION*/
+
 class Vehicle (
         val name: String,
         val model: String,

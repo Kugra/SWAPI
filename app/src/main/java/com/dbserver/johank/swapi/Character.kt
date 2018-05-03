@@ -1,5 +1,7 @@
 package com.dbserver.johank.swapi
 
+/*FULL IMPLEMENTATION*/
+
 data class Character (
         val name: String,
         val height: String,
@@ -11,6 +13,6 @@ data class Character (
         val gender: String,
         val homeworld: Planet,
         val films: List<Film>,
-//        val species: Specie,
-//        val vehicles: List<>,
+        val species: List<Specie>?,
+        val vehicles: List<Vehicle>?,
         val starships: List<Starship>?)

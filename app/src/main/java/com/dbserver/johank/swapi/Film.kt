@@ -1,5 +1,7 @@
 package com.dbserver.johank.swapi
 
+/*FULL IMPLEMENTATION*/
+
 data class Film (
         val title: String,
         val episode_id: String,

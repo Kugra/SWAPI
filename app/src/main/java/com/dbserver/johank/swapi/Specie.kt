@@ -1,5 +1,7 @@
 package com.dbserver.johank.swapi
 
+/*FULL IMPLEMENTATION*/
+
 data class Specie (
         val name: String,
         val classification: String,
